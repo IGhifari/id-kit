@@ -1,0 +1,1 @@
+export { terbilang, rupiah } from "./terbilang";

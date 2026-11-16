@@ -1,0 +1,12 @@
+import { defineConfig } from "tsup";
+
+export default defineConfig({
+    entry: {
+        index: "src/index.ts",
+        format: "src/format/index.ts",
+        phone: "src/phone/index.ts",
+    },
+    format: ["esm", "cjs"],
+    dts: true,
+    clean: true,
+});
