@@ -25,6 +25,11 @@
       "types": "./dist/phone.d.ts",
       "import": "./dist/phone.js",
       "require": "./dist/phone.cjs"
+    },
+    "./nik": {
+      "types": "./dist/nik.d.ts",
+      "import": "./dist/nik.js",
+      "require": "./dist/nik.cjs"
     }
   },
   "scripts": {

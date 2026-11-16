@@ -17,6 +17,7 @@ npm i @ghifari29/id-kit
 ```ts
 import { terbilang, rupiah } from "@ghifari29/id-kit/format";
 import { normalizePhone, isValidPhone } from "@ghifari29/id-kit/phone";
+import { parseNIK, isValidNIK } from "@ghifari29/id-kit/nik";
 
 terbilang(1250000);
 // "satu juta dua ratus lima puluh ribu rupiah"
@@ -29,14 +30,20 @@ normalizePhone("0812-3456-789");
 
 isValidPhone("021-555-1234");
 // false
+
+isValidNIK("3171011505900001");
+// true
+
+parseNIK("3201025505900002");
+// { valid: true, provinsiKode: "32", provinsi: "Jawa Barat", kabKotaKode: "01", kecamatanKode: "02", tanggalLahir: "1990-05-15", gender: "P", urutan: "0002" }
 ```
 
 ## Fitur
 
 - [x] `terbilang`, `rupiah`
 - [x] `normalizePhone`, `isValidPhone`
+- [x] `parseNIK`, `isValidNIK` (validasi NIK)
 - [ ] Deteksi operator seluler
-- [ ] Validasi NIK
 - [ ] Validasi NPWP dan nomor rekening
 - [ ] Libur nasional dan cuti bersama
 - [ ] Data wilayah
@@ -45,6 +52,7 @@ isValidPhone("021-555-1234");
 
 - `terbilang` hanya mendukung bilangan bulat.
 - `normalizePhone` hanya mengecek pola umum nomor seluler, belum memastikan awalan operator.
+- `parseNIK` dan `isValidNIK` hanya memvalidasi format struktur NIK (bukan bukti keaslian atau keterdaftaran di Dukcapil). Kode kabupaten/kota dan kecamatan tidak divalidasi, dan penentuan abad tahun 2 digit (`YY`) bersifat heuristik terhadap tahun berjalan (UTC).
 
 ## Berkontribusi
 
