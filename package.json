@@ -1,6 +1,6 @@
 {
   "name": "@ghifari29/id-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Utilitas Indonesia: terbilang, rupiah, nomor telepon, dan lainnya",
   "type": "module",
   "sideEffects": false,
@@ -42,8 +42,8 @@
   ],
   "license": "MIT",
   "repository": {
-  "type": "git",
-  "url": "git+https://github.com/IGhifari/id-kit.git"
+    "type": "git",
+    "url": "git+https://github.com/IGhifari/id-kit.git"
   },
   "homepage": "https://github.com/IGhifari/id-kit#readme",
   "bugs": "https://github.com/IGhifari/id-kit/issues",
