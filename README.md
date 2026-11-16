@@ -1,3 +1,6 @@
+[![npm](https://img.shields.io/npm/v/@ghifari29/id-kit)](https://www.npmjs.com/package/@ghifari29/id-kit)
+[![CI](https://github.com/IGhifari/id-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/IGhifari/id-kit/actions)
+
 # id-kit
 
 Utilitas kecil untuk kebutuhan Indonesia: terbilang, format Rupiah, dan normalisasi nomor telepon.
