@@ -35,6 +35,16 @@
       "types": "./dist/mask.d.ts",
       "import": "./dist/mask.js",
       "require": "./dist/mask.cjs"
+    },
+    "./npwp": {
+      "types": "./dist/npwp.d.ts",
+      "import": "./dist/npwp.js",
+      "require": "./dist/npwp.cjs"
+    },
+    "./bank": {
+      "types": "./dist/bank.d.ts",
+      "import": "./dist/bank.js",
+      "require": "./dist/bank.cjs"
     }
   },
   "scripts": {

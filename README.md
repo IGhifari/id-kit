@@ -19,6 +19,8 @@ import { terbilang, rupiah } from "@ghifari29/id-kit/format";
 import { normalizePhone, isValidPhone, detectOperator } from "@ghifari29/id-kit/phone";
 import { parseNIK, isValidNIK } from "@ghifari29/id-kit/nik";
 import { mask, maskNIK, maskPhone, maskAccount } from "@ghifari29/id-kit/mask";
+import { parseNPWP, parseNITKU, isValidNPWP, isValidNITKU } from "@ghifari29/id-kit/npwp";
+import { getBank, listBank } from "@ghifari29/id-kit/bank";
 
 terbilang(1250000);
 // "satu juta dua ratus lima puluh ribu rupiah"
@@ -52,6 +54,15 @@ maskPhone("0812-3456-789");
 
 maskAccount("123-456-7890");
 // "******7890"
+
+parseNPWP("01.234.567.8-901.000");
+// { valid: true, jenis: "legacy-15", digit: "012345678901000" }
+
+parseNITKU("0012345678901000000000");
+// { valid: true, digit: "0012345678901000000000", npwpInduk: "0012345678901000", jenisInduk: "badan-awalan-0", kodeLokasi: "000000", isPusat: true }
+
+getBank("014");
+// { kode: "014", nama: "Bank Central Asia (BCA)" }
 ```
 
 ## Fitur
@@ -61,7 +72,9 @@ maskAccount("123-456-7890");
 - [x] `parseNIK`, `isValidNIK` (validasi NIK)
 - [x] `mask`, `maskNIK`, `maskPhone`, `maskAccount` (masking data pribadi)
 - [x] `detectOperator` (deteksi operator seluler asal)
-- [ ] Validasi NPWP dan nomor rekening
+- [x] `parseNPWP`, `isValidNPWP`, `parseNITKU`, `isValidNITKU` (validasi format NPWP & NITKU)
+- [x] `getBank`, `listBank` (daftar kode bank 3 digit)
+- [ ] Validasi nomor rekening
 - [ ] Libur nasional dan cuti bersama
 - [ ] Data wilayah
 
@@ -72,6 +85,8 @@ maskAccount("123-456-7890");
 - `detectOperator` hanya mengidentifikasi **operator asal berdasarkan alokasi awalan**, bukan operator aktif saat ini karena adanya *number portability*, dan `grup` dapat berubah karena merger/akuisisi. Data mengacu pada penomoran Komdigi dan informasi resmi operator (terakhir diverifikasi `2026-11-18`; belum ada satu tabel resmi tunggal yang lengkap). Awalan yang belum terverifikasi (`0834`–`0837`, `0879`, `0893`, `0894`) maupun yang telah dicabut (`0828`, `0868`) sengaja mengembalikan `"awalan-tidak-dikenal"`, sehingga nomor yang valid menurut `isValidPhone` tetap dapat mengembalikan `"awalan-tidak-dikenal"`.
 - `parseNIK` dan `isValidNIK` hanya memvalidasi format struktur NIK (bukan bukti keaslian atau keterdaftaran di Dukcapil). Kode kabupaten/kota dan kecamatan tidak divalidasi, dan penentuan abad tahun 2 digit (`YY`) bersifat heuristik terhadap tahun berjalan (UTC).
 - Modul `mask` (`mask`, `maskNIK`, `maskPhone`, `maskAccount`) hanya untuk **TAMPILAN** UI, bukan enkripsi atau anonimisasi. Jangan menyimpan data asli di log hanya karena sudah ada fungsi masking. Hanya `mask()` yang menjamin panjang hasil (dalam Unicode code point) sama dengan panjang input.
+- `parseNPWP`, `isValidNPWP`, `parseNITKU`, dan `isValidNITKU` hanya memvalidasi format dan panjang (tanpa checksum), bukan bukti terdaftar di DJP. Klasifikasi `"nik"` hanya menunjukkan bentuk cocok dengan NIK, bukan bukti NPWP orang pribadi terdaftar (WNA bukan penduduk tidak memakai NIK); pola `"badan-awalan-0"` (`0 + 15 digit`) hanya berlaku untuk entitas terdaftar sebelum 14 Juli 2022.
+- Modul `bank` (`getBank`, `listBank`) diverifikasi pada `2026-11-18` dari sumber sekunder (jaringan switching dan situs bank) karena Bank Indonesia tidak menerbitkan satu tabel terbuka untuk semua kode 3 digit. Daftar bisa usang akibat perubahan nama atau merger—cocokkan dengan sumber resmi bank sebelum dipakai untuk transaksi. Tidak ada validasi panjang nomor rekening, dengan sengaja.
 
 ## Berkontribusi
 
