@@ -16,7 +16,7 @@ npm i @ghifari29/id-kit
 
 ```ts
 import { terbilang, rupiah } from "@ghifari29/id-kit/format";
-import { normalizePhone, isValidPhone } from "@ghifari29/id-kit/phone";
+import { normalizePhone, isValidPhone, detectOperator } from "@ghifari29/id-kit/phone";
 import { parseNIK, isValidNIK } from "@ghifari29/id-kit/nik";
 import { mask, maskNIK, maskPhone, maskAccount } from "@ghifari29/id-kit/mask";
 
@@ -31,6 +31,9 @@ normalizePhone("0812-3456-789");
 
 isValidPhone("021-555-1234");
 // false
+
+detectOperator("0812-3456-789");
+// { valid: true, operator: "Telkomsel", grup: "Telkomsel", prefix: "0812" }
 
 isValidNIK("3171011505900001");
 // true
@@ -57,7 +60,7 @@ maskAccount("123-456-7890");
 - [x] `normalizePhone`, `isValidPhone`
 - [x] `parseNIK`, `isValidNIK` (validasi NIK)
 - [x] `mask`, `maskNIK`, `maskPhone`, `maskAccount` (masking data pribadi)
-- [ ] Deteksi operator seluler
+- [x] `detectOperator` (deteksi operator seluler asal)
 - [ ] Validasi NPWP dan nomor rekening
 - [ ] Libur nasional dan cuti bersama
 - [ ] Data wilayah
@@ -66,6 +69,7 @@ maskAccount("123-456-7890");
 
 - `terbilang` hanya mendukung bilangan bulat.
 - `normalizePhone` hanya mengecek pola umum nomor seluler, belum memastikan awalan operator.
+- `detectOperator` hanya mengidentifikasi **operator asal berdasarkan alokasi awalan**, bukan operator aktif saat ini karena adanya *number portability*, dan `grup` dapat berubah karena merger/akuisisi. Data mengacu pada penomoran Komdigi dan informasi resmi operator (terakhir diverifikasi `2026-11-18`; belum ada satu tabel resmi tunggal yang lengkap). Awalan yang belum terverifikasi (`0834`–`0837`, `0879`, `0893`, `0894`) maupun yang telah dicabut (`0828`, `0868`) sengaja mengembalikan `"awalan-tidak-dikenal"`, sehingga nomor yang valid menurut `isValidPhone` tetap dapat mengembalikan `"awalan-tidak-dikenal"`.
 - `parseNIK` dan `isValidNIK` hanya memvalidasi format struktur NIK (bukan bukti keaslian atau keterdaftaran di Dukcapil). Kode kabupaten/kota dan kecamatan tidak divalidasi, dan penentuan abad tahun 2 digit (`YY`) bersifat heuristik terhadap tahun berjalan (UTC).
 - Modul `mask` (`mask`, `maskNIK`, `maskPhone`, `maskAccount`) hanya untuk **TAMPILAN** UI, bukan enkripsi atau anonimisasi. Jangan menyimpan data asli di log hanya karena sudah ada fungsi masking. Hanya `mask()` yang menjamin panjang hasil (dalam Unicode code point) sama dengan panjang input.
 

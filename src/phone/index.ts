@@ -13,3 +13,11 @@ export function normalizePhone(input: string): string | null {
   export function isValidPhone(input: string): boolean {
     return normalizePhone(input) !== null;
   }
+
+export { detectOperator } from "./operator";
+export type {
+  OperatorBrand,
+  OperatorGroup,
+  DetectOperatorReason,
+  DetectOperatorResult,
+} from "./operator";
