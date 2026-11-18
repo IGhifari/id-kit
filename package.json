@@ -30,6 +30,11 @@
       "types": "./dist/nik.d.ts",
       "import": "./dist/nik.js",
       "require": "./dist/nik.cjs"
+    },
+    "./mask": {
+      "types": "./dist/mask.d.ts",
+      "import": "./dist/mask.js",
+      "require": "./dist/mask.cjs"
     }
   },
   "scripts": {

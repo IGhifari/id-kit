@@ -18,6 +18,7 @@ npm i @ghifari29/id-kit
 import { terbilang, rupiah } from "@ghifari29/id-kit/format";
 import { normalizePhone, isValidPhone } from "@ghifari29/id-kit/phone";
 import { parseNIK, isValidNIK } from "@ghifari29/id-kit/nik";
+import { mask, maskNIK, maskPhone, maskAccount } from "@ghifari29/id-kit/mask";
 
 terbilang(1250000);
 // "satu juta dua ratus lima puluh ribu rupiah"
@@ -36,6 +37,18 @@ isValidNIK("3171011505900001");
 
 parseNIK("3201025505900002");
 // { valid: true, provinsiKode: "32", provinsi: "Jawa Barat", kabKotaKode: "01", kecamatanKode: "02", tanggalLahir: "1990-05-15", gender: "P", urutan: "0002" }
+
+mask("rahasia", { visibleStart: 1, visibleEnd: 1 });
+// "r*****a"
+
+maskNIK("3171 0115 0590 0001");
+// "3171********0001"
+
+maskPhone("0812-3456-789");
+// "+628******789"
+
+maskAccount("123-456-7890");
+// "******7890"
 ```
 
 ## Fitur
@@ -43,6 +56,7 @@ parseNIK("3201025505900002");
 - [x] `terbilang`, `rupiah`
 - [x] `normalizePhone`, `isValidPhone`
 - [x] `parseNIK`, `isValidNIK` (validasi NIK)
+- [x] `mask`, `maskNIK`, `maskPhone`, `maskAccount` (masking data pribadi)
 - [ ] Deteksi operator seluler
 - [ ] Validasi NPWP dan nomor rekening
 - [ ] Libur nasional dan cuti bersama
@@ -53,6 +67,7 @@ parseNIK("3201025505900002");
 - `terbilang` hanya mendukung bilangan bulat.
 - `normalizePhone` hanya mengecek pola umum nomor seluler, belum memastikan awalan operator.
 - `parseNIK` dan `isValidNIK` hanya memvalidasi format struktur NIK (bukan bukti keaslian atau keterdaftaran di Dukcapil). Kode kabupaten/kota dan kecamatan tidak divalidasi, dan penentuan abad tahun 2 digit (`YY`) bersifat heuristik terhadap tahun berjalan (UTC).
+- Modul `mask` (`mask`, `maskNIK`, `maskPhone`, `maskAccount`) hanya untuk **TAMPILAN** UI, bukan enkripsi atau anonimisasi. Jangan menyimpan data asli di log hanya karena sudah ada fungsi masking. Hanya `mask()` yang menjamin panjang hasil (dalam Unicode code point) sama dengan panjang input.
 
 ## Berkontribusi
 
