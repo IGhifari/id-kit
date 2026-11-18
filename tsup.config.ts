@@ -10,6 +10,7 @@ export default defineConfig({
         npwp: "src/npwp/index.ts",
         bank: "src/bank/index.ts",
         libur: "src/libur/index.ts",
+        waktu: "src/waktu/index.ts",
     },
     format: ["esm", "cjs"],
     dts: true,

@@ -50,6 +50,11 @@
       "types": "./dist/libur.d.ts",
       "import": "./dist/libur.js",
       "require": "./dist/libur.cjs"
+    },
+    "./waktu": {
+      "types": "./dist/waktu.d.ts",
+      "import": "./dist/waktu.js",
+      "require": "./dist/waktu.cjs"
     }
   },
   "scripts": {
