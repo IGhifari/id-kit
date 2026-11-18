@@ -9,6 +9,7 @@ export default defineConfig({
         mask: "src/mask/index.ts",
         npwp: "src/npwp/index.ts",
         bank: "src/bank/index.ts",
+        libur: "src/libur/index.ts",
     },
     format: ["esm", "cjs"],
     dts: true,

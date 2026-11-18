@@ -21,6 +21,7 @@ import { parseNIK, isValidNIK } from "@ghifari29/id-kit/nik";
 import { mask, maskNIK, maskPhone, maskAccount } from "@ghifari29/id-kit/mask";
 import { parseNPWP, parseNITKU, isValidNPWP, isValidNITKU } from "@ghifari29/id-kit/npwp";
 import { getBank, listBank } from "@ghifari29/id-kit/bank";
+import { cekLibur, daftarLibur, tahunTersedia } from "@ghifari29/id-kit/libur";
 
 terbilang(1250000);
 // "satu juta dua ratus lima puluh ribu rupiah"
@@ -63,6 +64,12 @@ parseNITKU("0012345678901000000000");
 
 getBank("014");
 // { kode: "014", nama: "Bank Central Asia (BCA)" }
+
+cekLibur("2026-08-17");
+// { status: "libur-nasional", nama: "Proklamasi Kemerdekaan" }
+
+cekLibur("2099-01-01");
+// { status: "data-tidak-tersedia", tahun: 2099 }
 ```
 
 ## Fitur
@@ -74,8 +81,8 @@ getBank("014");
 - [x] `detectOperator` (deteksi operator seluler asal)
 - [x] `parseNPWP`, `isValidNPWP`, `parseNITKU`, `isValidNITKU` (validasi format NPWP & NITKU)
 - [x] `getBank`, `listBank` (daftar kode bank 3 digit)
+- [x] `cekLibur`, `daftarLibur`, `tahunTersedia` (libur nasional dan cuti bersama)
 - [ ] Validasi nomor rekening
-- [ ] Libur nasional dan cuti bersama
 - [ ] Data wilayah
 
 ## Batasan
@@ -87,6 +94,7 @@ getBank("014");
 - Modul `mask` (`mask`, `maskNIK`, `maskPhone`, `maskAccount`) hanya untuk **TAMPILAN** UI, bukan enkripsi atau anonimisasi. Jangan menyimpan data asli di log hanya karena sudah ada fungsi masking. Hanya `mask()` yang menjamin panjang hasil (dalam Unicode code point) sama dengan panjang input.
 - `parseNPWP`, `isValidNPWP`, `parseNITKU`, dan `isValidNITKU` hanya memvalidasi format dan panjang (tanpa checksum), bukan bukti terdaftar di DJP. Klasifikasi `"nik"` hanya menunjukkan bentuk cocok dengan NIK, bukan bukti NPWP orang pribadi terdaftar (WNA bukan penduduk tidak memakai NIK); pola `"badan-awalan-0"` (`0 + 15 digit`) hanya berlaku untuk entitas terdaftar sebelum 14 Juli 2022.
 - Modul `bank` (`getBank`, `listBank`) diverifikasi pada `2026-11-18` dari sumber sekunder (jaringan switching dan situs bank) karena Bank Indonesia tidak menerbitkan satu tabel terbuka untuk semua kode 3 digit. Daftar bisa usang akibat perubahan nama atau merger—cocokkan dengan sumber resmi bank sebelum dipakai untuk transaksi. Tidak ada validasi panjang nomor rekening, dengan sengaja.
+- Modul `libur` (`cekLibur`, `daftarLibur`, `tahunTersedia`) diverifikasi pada `2026-11-18` dari SKB 3 Menteri (Kemenag, Kemnaker, KemenPAN-RB). SKB dapat direvisi di tengah tahun (contoh: pada 2025, satu hari cuti bersama ditambahkan pada Agustus), sehingga data bisa kedaluwarsa dan library membutuhkan rilis baru tiap tahun untuk menambah data tahun berikutnya. Tahun tanpa data menghasilkan `"data-tidak-tersedia"`, bukan `"bukan-libur"`. Ini bukan nasihat hukum mengenai hak cuti atau upah lembur, dan hari libur lokal atau daerah tidak termasuk.
 
 ## Berkontribusi
 

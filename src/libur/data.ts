@@ -1,0 +1,101 @@
+export type LiburJenis = "libur-nasional" | "cuti-bersama";
+
+export interface LiburItem {
+  readonly tanggal: string;
+  readonly nama: string;
+  readonly jenis: LiburJenis;
+}
+
+/**
+ * Data hari libur nasional dan cuti bersama Indonesia menurut SKB 3 Menteri
+ * (Kemenag, Kemnaker, KemenPAN-RB).
+ *
+ * Terakhir diverifikasi: 2026-11-18.
+ */
+export const DATA_LIBUR: Readonly<Record<number, readonly LiburItem[]>> = {
+  2025: [
+    { tanggal: "2025-01-01", nama: "Tahun Baru 2025 Masehi", jenis: "libur-nasional" },
+    { tanggal: "2025-01-27", nama: "Isra Mikraj Nabi Muhammad SAW", jenis: "libur-nasional" },
+    { tanggal: "2025-01-28", nama: "Tahun Baru Imlek 2576 Kongzili", jenis: "cuti-bersama" },
+    { tanggal: "2025-01-29", nama: "Tahun Baru Imlek 2576 Kongzili", jenis: "libur-nasional" },
+    { tanggal: "2025-03-28", nama: "Hari Suci Nyepi (Tahun Baru Saka 1947)", jenis: "cuti-bersama" },
+    { tanggal: "2025-03-29", nama: "Hari Suci Nyepi (Tahun Baru Saka 1947)", jenis: "libur-nasional" },
+    { tanggal: "2025-03-31", nama: "Hari Raya Idulfitri 1446 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2025-04-01", nama: "Hari Raya Idulfitri 1446 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2025-04-02", nama: "Hari Raya Idulfitri 1446 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2025-04-03", nama: "Hari Raya Idulfitri 1446 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2025-04-04", nama: "Hari Raya Idulfitri 1446 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2025-04-07", nama: "Hari Raya Idulfitri 1446 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2025-04-18", nama: "Wafat Yesus Kristus", jenis: "libur-nasional" },
+    { tanggal: "2025-04-20", nama: "Kebangkitan Yesus Kristus (Paskah)", jenis: "libur-nasional" },
+    { tanggal: "2025-05-01", nama: "Hari Buruh Internasional", jenis: "libur-nasional" },
+    { tanggal: "2025-05-12", nama: "Hari Raya Waisak 2569 BE", jenis: "libur-nasional" },
+    { tanggal: "2025-05-13", nama: "Hari Raya Waisak 2569 BE", jenis: "cuti-bersama" },
+    { tanggal: "2025-05-29", nama: "Kenaikan Yesus Kristus", jenis: "libur-nasional" },
+    { tanggal: "2025-05-30", nama: "Kenaikan Yesus Kristus", jenis: "cuti-bersama" },
+    { tanggal: "2025-06-01", nama: "Hari Lahir Pancasila", jenis: "libur-nasional" },
+    { tanggal: "2025-06-06", nama: "Hari Raya Iduladha 1446 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2025-06-09", nama: "Hari Raya Iduladha 1446 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2025-06-27", nama: "1 Muharam Tahun Baru Islam 1447 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2025-08-17", nama: "Proklamasi Kemerdekaan", jenis: "libur-nasional" },
+    { tanggal: "2025-08-18", nama: "HUT ke-80 Kemerdekaan Republik Indonesia", jenis: "cuti-bersama" },
+    { tanggal: "2025-09-05", nama: "Maulid Nabi Muhammad SAW", jenis: "libur-nasional" },
+    { tanggal: "2025-12-25", nama: "Kelahiran Yesus Kristus", jenis: "libur-nasional" },
+    { tanggal: "2025-12-26", nama: "Kelahiran Yesus Kristus", jenis: "cuti-bersama" },
+  ],
+  2026: [
+    { tanggal: "2026-01-01", nama: "Tahun Baru 2026 Masehi", jenis: "libur-nasional" },
+    { tanggal: "2026-01-16", nama: "Isra Mikraj Nabi Muhammad SAW", jenis: "libur-nasional" },
+    { tanggal: "2026-02-16", nama: "Tahun Baru Imlek 2577 Kongzili", jenis: "cuti-bersama" },
+    { tanggal: "2026-02-17", nama: "Tahun Baru Imlek 2577 Kongzili", jenis: "libur-nasional" },
+    { tanggal: "2026-03-18", nama: "Hari Suci Nyepi (Tahun Baru Saka 1948)", jenis: "cuti-bersama" },
+    { tanggal: "2026-03-19", nama: "Hari Suci Nyepi (Tahun Baru Saka 1948)", jenis: "libur-nasional" },
+    { tanggal: "2026-03-20", nama: "Hari Raya Idulfitri 1447 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2026-03-21", nama: "Hari Raya Idulfitri 1447 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2026-03-22", nama: "Hari Raya Idulfitri 1447 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2026-03-23", nama: "Hari Raya Idulfitri 1447 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2026-03-24", nama: "Hari Raya Idulfitri 1447 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2026-04-03", nama: "Wafat Yesus Kristus", jenis: "libur-nasional" },
+    { tanggal: "2026-04-05", nama: "Kebangkitan Yesus Kristus (Paskah)", jenis: "libur-nasional" },
+    { tanggal: "2026-05-01", nama: "Hari Buruh Internasional", jenis: "libur-nasional" },
+    { tanggal: "2026-05-14", nama: "Kenaikan Yesus Kristus", jenis: "libur-nasional" },
+    { tanggal: "2026-05-15", nama: "Kenaikan Yesus Kristus", jenis: "cuti-bersama" },
+    { tanggal: "2026-05-27", nama: "Hari Raya Iduladha 1447 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2026-05-28", nama: "Hari Raya Iduladha 1447 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2026-05-31", nama: "Hari Raya Waisak 2570 BE", jenis: "libur-nasional" },
+    { tanggal: "2026-06-01", nama: "Hari Lahir Pancasila", jenis: "libur-nasional" },
+    { tanggal: "2026-06-16", nama: "1 Muharam Tahun Baru Islam 1448 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2026-08-17", nama: "Proklamasi Kemerdekaan", jenis: "libur-nasional" },
+    { tanggal: "2026-08-25", nama: "Maulid Nabi Muhammad SAW", jenis: "libur-nasional" },
+    { tanggal: "2026-12-24", nama: "Kelahiran Yesus Kristus", jenis: "cuti-bersama" },
+    { tanggal: "2026-12-25", nama: "Kelahiran Yesus Kristus", jenis: "libur-nasional" },
+  ],
+  2027: [
+    { tanggal: "2027-01-01", nama: "Tahun Baru 2027 Masehi", jenis: "libur-nasional" },
+    { tanggal: "2027-01-05", nama: "Isra Mikraj Nabi Muhammad SAW 1448 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2027-02-05", nama: "Tahun Baru Imlek 2578 Kongzili", jenis: "cuti-bersama" },
+    { tanggal: "2027-02-06", nama: "Tahun Baru Imlek 2578 Kongzili", jenis: "libur-nasional" },
+    { tanggal: "2027-03-08", nama: "Hari Suci Nyepi (Tahun Baru Saka 1949)", jenis: "libur-nasional" },
+    { tanggal: "2027-03-09", nama: "Hari Raya Idulfitri 1448 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2027-03-10", nama: "Hari Raya Idulfitri 1448 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2027-03-11", nama: "Hari Raya Idulfitri 1448 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2027-03-12", nama: "Hari Raya Idulfitri 1448 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2027-03-15", nama: "Hari Raya Idulfitri 1448 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2027-03-25", nama: "Wafat Yesus Kristus", jenis: "cuti-bersama" },
+    { tanggal: "2027-03-26", nama: "Wafat Yesus Kristus", jenis: "libur-nasional" },
+    { tanggal: "2027-03-28", nama: "Kebangkitan Yesus Kristus (Paskah)", jenis: "libur-nasional" },
+    { tanggal: "2027-05-01", nama: "Hari Buruh Internasional", jenis: "libur-nasional" },
+    { tanggal: "2027-05-06", nama: "Kenaikan Yesus Kristus", jenis: "libur-nasional" },
+    { tanggal: "2027-05-17", nama: "Hari Raya Iduladha 1448 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2027-05-18", nama: "Hari Raya Iduladha 1448 Hijriah", jenis: "cuti-bersama" },
+    { tanggal: "2027-05-19", nama: "Hari Raya Waisak 2571 BE", jenis: "cuti-bersama" },
+    { tanggal: "2027-05-20", nama: "Hari Raya Waisak 2571 BE", jenis: "libur-nasional" },
+    { tanggal: "2027-06-01", nama: "Hari Lahir Pancasila", jenis: "libur-nasional" },
+    { tanggal: "2027-06-06", nama: "1 Muharam Tahun Baru Islam 1449 Hijriah", jenis: "libur-nasional" },
+    { tanggal: "2027-08-15", nama: "Maulid Nabi Muhammad SAW", jenis: "libur-nasional" },
+    { tanggal: "2027-08-17", nama: "Proklamasi Kemerdekaan", jenis: "libur-nasional" },
+    { tanggal: "2027-12-24", nama: "Kelahiran Yesus Kristus", jenis: "cuti-bersama" },
+    { tanggal: "2027-12-25", nama: "Kelahiran Yesus Kristus", jenis: "libur-nasional" },
+    { tanggal: "2027-12-26", nama: "Isra Mikraj Nabi Muhammad SAW 1449 Hijriah", jenis: "libur-nasional" },
+  ],
+};

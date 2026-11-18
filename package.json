@@ -45,6 +45,11 @@
       "types": "./dist/bank.d.ts",
       "import": "./dist/bank.js",
       "require": "./dist/bank.cjs"
+    },
+    "./libur": {
+      "types": "./dist/libur.d.ts",
+      "import": "./dist/libur.js",
+      "require": "./dist/libur.cjs"
     }
   },
   "scripts": {
