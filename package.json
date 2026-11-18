@@ -55,6 +55,11 @@
       "types": "./dist/waktu.d.ts",
       "import": "./dist/waktu.js",
       "require": "./dist/waktu.cjs"
+    },
+    "./wilayah": {
+      "types": "./dist/wilayah.d.ts",
+      "import": "./dist/wilayah.js",
+      "require": "./dist/wilayah.cjs"
     }
   },
   "scripts": {

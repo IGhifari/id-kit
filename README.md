@@ -23,6 +23,7 @@ import { parseNPWP, parseNITKU, isValidNPWP, isValidNITKU } from "@ghifari29/id-
 import { getBank, listBank } from "@ghifari29/id-kit/bank";
 import { cekLibur, daftarLibur, tahunTersedia } from "@ghifari29/id-kit/libur";
 import { formatTanggal, formatWaktu, formatTanggalWaktu, keZonaWaktu, zonaWaktuProvinsi } from "@ghifari29/id-kit/waktu";
+import { getProvinsi, listProvinsi, getKabKota, listKabKota, cariWilayah } from "@ghifari29/id-kit/wilayah";
 
 terbilang(1250000);
 // "satu juta dua ratus lima puluh ribu rupiah"
@@ -80,6 +81,12 @@ formatTanggalWaktu("2026-11-18T13:35:00Z", { zona: "WITA" });
 
 zonaWaktuProvinsi("64");
 // "WITA"
+
+getKabKota("3171");
+// { kode: "31.71", provinsiKode: "31", nama: "Kota Administrasi Jakarta Pusat", jenis: "kota" }
+
+cariWilayah("sorong");
+// [{ tingkat: "kabupaten", kode: "96.01", ... }, { tingkat: "kabupaten", kode: "96.02", ... }, { tingkat: "kota", kode: "96.71", ... }]
 ```
 
 ## Fitur
@@ -93,7 +100,7 @@ zonaWaktuProvinsi("64");
 - [x] `getBank`, `listBank` (daftar kode bank 3 digit)
 - [x] `cekLibur`, `daftarLibur`, `tahunTersedia` (libur nasional dan cuti bersama)
 - [x] `formatTanggal`, `formatWaktu`, `formatTanggalWaktu`, `keZonaWaktu`, `zonaWaktuProvinsi` (format & zona waktu Indonesia)
-- [ ] Data wilayah
+- [x] `getProvinsi`, `listProvinsi`, `getKabKota`, `listKabKota`, `cariWilayah` (data 38 provinsi dan 514 kabupaten/kota)
 
 ## Batasan
 
@@ -106,6 +113,7 @@ zonaWaktuProvinsi("64");
 - Modul `bank` (`getBank`, `listBank`) diverifikasi pada `2026-11-18` dari sumber sekunder (jaringan switching dan situs bank) karena Bank Indonesia tidak menerbitkan satu tabel terbuka untuk semua kode 3 digit. Daftar bisa usang akibat perubahan nama atau merger—cocokkan dengan sumber resmi bank sebelum dipakai untuk transaksi. Tidak ada validasi panjang nomor rekening, dengan sengaja.
 - Modul `libur` (`cekLibur`, `daftarLibur`, `tahunTersedia`) diverifikasi pada `2026-11-18` dari SKB 3 Menteri (Kemenag, Kemnaker, KemenPAN-RB). SKB dapat direvisi di tengah tahun (contoh: pada 2025, satu hari cuti bersama ditambahkan pada Agustus), sehingga data bisa kedaluwarsa dan library membutuhkan rilis baru tiap tahun untuk menambah data tahun berikutnya. Tahun tanpa data menghasilkan `"data-tidak-tersedia"`, bukan `"bukan-libur"`. Ini bukan nasihat hukum mengenai hak cuti atau upah lembur, dan hari libur lokal atau daerah tidak termasuk.
 - Modul `waktu` menolak string ISO tanpa zona waktu eksplisit agar tidak bergantung pada zona waktu mesin lokal (`YYYY-MM-DD` hanya diterima pada `formatTanggal`). Konversi memakai offset tetap (`WIB` `+07:00`, `WITA` `+08:00`, `WIT` `+09:00`) tanpa DST. `zonaWaktuProvinsi` menggunakan 38 kode provinsi Kemendagri (`11`–`96`) agar konsisten dengan modul `nik`, bukan kode wilayah kerja statistik BPS yang berbeda di wilayah Papua.
+- Modul `wilayah` berisi data 38 provinsi dan 514 kabupaten/kota berdasarkan kode wilayah Kemendagri (terakhir diverifikasi `2026-11-18`; penamaan provinsi `31` dan `34` diseragamkan menjadi `"DKI Jakarta"` dan `"DI Yogyakarta"` agar konsisten dengan modul `nik`). Kecamatan, kelurahan/desa, serta kode wilayah kerja statistik BPS tidak disertakan, dan data dapat berubah bila terjadi pemekaran wilayah baru.
 
 ## Berkontribusi
 

@@ -6,3 +6,4 @@ export * from "./npwp";
 export * from "./bank";
 export * from "./libur";
 export * from "./waktu";
+export * from "./wilayah";

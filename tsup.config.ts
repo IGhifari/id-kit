@@ -11,6 +11,7 @@ export default defineConfig({
         bank: "src/bank/index.ts",
         libur: "src/libur/index.ts",
         waktu: "src/waktu/index.ts",
+        wilayah: "src/wilayah/index.ts",
     },
     format: ["esm", "cjs"],
     dts: true,
