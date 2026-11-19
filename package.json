@@ -1,7 +1,7 @@
 {
   "name": "@ghifari29/id-kit",
   "version": "0.8.0",
-  "description": "Utilitas Indonesia: terbilang, rupiah, nomor telepon, dan lainnya",
+  "description": "Utilitas TypeScript offline dan zero-dependency untuk Indonesia: format, telepon, operator, NIK, masking, NPWP/NITKU, kode bank, hari libur, waktu, dan wilayah",
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -65,15 +65,23 @@
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
+    "test:exports": "node scripts/check-exports.mjs",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+    "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run test:exports"
   },
   "keywords": [
     "indonesia",
     "terbilang",
     "rupiah",
     "nik",
-    "phone"
+    "npwp",
+    "nitku",
+    "phone",
+    "masking",
+    "bank",
+    "libur",
+    "wib",
+    "wilayah"
   ],
   "license": "MIT",
   "repository": {

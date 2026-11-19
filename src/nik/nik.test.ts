@@ -140,4 +140,18 @@ describe("parseNIK", () => {
     expect(parseNIK(input)).toEqual({ valid: false, alasan });
     expect(isValidNIK(input)).toBe(false);
   });
+
+  it.each([[null], [undefined], [3171011505900001], [{}]])(
+    "melempar TypeError untuk input non-string tanpa membocorkan input",
+    (bad) => {
+      for (const fn of [parseNIK, isValidNIK]) {
+        expect(() => fn(bad as unknown as string)).toThrow(TypeError);
+        try {
+          fn(bad as unknown as string);
+        } catch (err) {
+          expect((err as Error).message).not.toContain(String(bad));
+        }
+      }
+    }
+  );
 });

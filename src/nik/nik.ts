@@ -94,6 +94,10 @@ function isValidUTCDate(year: number, month: number, day: number): boolean {
  *   dua digit tahun berjalan (UTC), dianggap abad 1900-an; selain itu dianggap 2000-an.
  */
 export function parseNIK(input: string): ParseNIKResult {
+  if (typeof input !== "string") {
+    throw new TypeError("Input harus berupa string");
+  }
+
   const cleaned = input.replace(/\s+/g, "");
 
   if (cleaned.length === 0) {

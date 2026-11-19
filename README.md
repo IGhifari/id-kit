@@ -3,14 +3,29 @@
 
 # id-kit
 
-Utilitas kecil untuk kebutuhan Indonesia: terbilang, format Rupiah, dan normalisasi nomor telepon.
-Tanpa dependency, TypeScript penuh, bisa dipakai offline.
+Utilitas TypeScript offline dan tanpa dependency untuk kebutuhan Indonesia: format Rupiah & terbilang, nomor telepon & deteksi operator, NIK, masking data pribadi, NPWP/NITKU, kode bank, hari libur nasional, format & zona waktu (`WIB`/`WITA`/`WIT`), serta data wilayah (38 provinsi dan 514 kabupaten/kota).
 
 ## Instalasi
 
 ```bash
 npm i @ghifari29/id-kit
 ```
+
+## Subpath Export
+
+Semua fungsi dapat diimpor dari root (`@ghifari29/id-kit`) atau per modul agar bundle tetap ringan:
+
+| Subpath | Ekspor Utama |
+| --- | --- |
+| `@ghifari29/id-kit/format` | `terbilang`, `rupiah` |
+| `@ghifari29/id-kit/phone` | `normalizePhone`, `isValidPhone`, `detectOperator` |
+| `@ghifari29/id-kit/nik` | `parseNIK`, `isValidNIK` |
+| `@ghifari29/id-kit/mask` | `mask`, `maskNIK`, `maskPhone`, `maskAccount` |
+| `@ghifari29/id-kit/npwp` | `parseNPWP`, `isValidNPWP`, `parseNITKU`, `isValidNITKU` |
+| `@ghifari29/id-kit/bank` | `getBank`, `listBank` |
+| `@ghifari29/id-kit/libur` | `cekLibur`, `daftarLibur`, `tahunTersedia` |
+| `@ghifari29/id-kit/waktu` | `formatTanggal`, `formatWaktu`, `formatTanggalWaktu`, `keZonaWaktu`, `zonaWaktuProvinsi` |
+| `@ghifari29/id-kit/wilayah` | `getProvinsi`, `listProvinsi`, `getKabKota`, `listKabKota`, `cariWilayah` |
 
 ## Pemakaian
 
@@ -104,8 +119,8 @@ cariWilayah("sorong");
 
 ## Batasan
 
-- `terbilang` hanya mendukung bilangan bulat.
-- `normalizePhone` hanya mengecek pola umum nomor seluler, belum memastikan awalan operator.
+- `terbilang` hanya mendukung bilangan bulat aman (`Number.isSafeInteger`, hingga skala kuadriliun); `rupiah` hanya menerima angka berhingga (`Number.isFinite`).
+- `normalizePhone` hanya mengecek pola umum nomor seluler dan menolak karakter huruf/simbol tak dikenal, belum memastikan awalan operator.
 - `detectOperator` hanya mengidentifikasi **operator asal berdasarkan alokasi awalan**, bukan operator aktif saat ini karena adanya *number portability*, dan `grup` dapat berubah karena merger/akuisisi. Data mengacu pada penomoran Komdigi dan informasi resmi operator (terakhir diverifikasi `2026-11-18`; belum ada satu tabel resmi tunggal yang lengkap). Awalan yang belum terverifikasi (`0834`–`0837`, `0879`, `0893`, `0894`) maupun yang telah dicabut (`0828`, `0868`) sengaja mengembalikan `"awalan-tidak-dikenal"`, sehingga nomor yang valid menurut `isValidPhone` tetap dapat mengembalikan `"awalan-tidak-dikenal"`.
 - `parseNIK` dan `isValidNIK` hanya memvalidasi format struktur NIK (bukan bukti keaslian atau keterdaftaran di Dukcapil). Kode kabupaten/kota dan kecamatan tidak divalidasi, dan penentuan abad tahun 2 digit (`YY`) bersifat heuristik terhadap tahun berjalan (UTC).
 - Modul `mask` (`mask`, `maskNIK`, `maskPhone`, `maskAccount`) hanya untuk **TAMPILAN** UI, bukan enkripsi atau anonimisasi. Jangan menyimpan data asli di log hanya karena sudah ada fungsi masking. Hanya `mask()` yang menjamin panjang hasil (dalam Unicode code point) sama dengan panjang input.
