@@ -2,6 +2,11 @@
 
 Seluruh perubahan penting pada `@ghifari29/id-kit` dicatat di dokumen ini.
 
+## [1.2.0] - 2026-11-19
+
+### Ditambahkan
+- `hitungHariKerja` dan `tambahHariKerja` pada modul `libur` dengan opsi `sabtuKerja` (default `false`) serta `sertakanCutiBersama` (default `true`), mengembalikan `data-tidak-tersedia` jika rentang atau pergeseran menyentuh tahun tanpa data SKB.
+
 ## [1.1.0] - 2026-11-19
 
 ### Ditambahkan

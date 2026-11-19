@@ -34,6 +34,8 @@ const expectedFunctions = {
     "cekLibur",
     "daftarLibur",
     "tahunTersedia",
+    "hitungHariKerja",
+    "tambahHariKerja",
     "formatTanggal",
     "formatWaktu",
     "formatTanggalWaktu",
@@ -51,7 +53,13 @@ const expectedFunctions = {
   "./mask": ["mask", "maskNIK", "maskPhone", "maskAccount"],
   "./npwp": ["parseNPWP", "isValidNPWP", "parseNITKU", "isValidNITKU"],
   "./bank": ["getBank", "listBank"],
-  "./libur": ["cekLibur", "daftarLibur", "tahunTersedia"],
+  "./libur": [
+    "cekLibur",
+    "daftarLibur",
+    "tahunTersedia",
+    "hitungHariKerja",
+    "tambahHariKerja",
+  ],
   "./waktu": [
     "formatTanggal",
     "formatWaktu",
@@ -124,5 +132,18 @@ const wilayahCjs = require(
 assert.equal(wilayahCjs.listProvinsi().length, 38);
 assert.equal(wilayahCjs.listKabKota().length, 514);
 assert.equal(wilayahCjs.getKabKota("3171").kode, "31.71");
+
+const liburEsm = await import(
+  pathToFileURL(path.resolve(rootDir, pkg.exports["./libur"].import)).href
+);
+assert.deepEqual(liburEsm.hitungHariKerja("2026-08-14", "2026-08-18"), {
+  valid: true,
+  hariKerja: 2,
+  totalHari: 5,
+});
+assert.deepEqual(liburEsm.tambahHariKerja("2026-08-14", 1), {
+  valid: true,
+  tanggal: "2026-08-18",
+});
 
 console.log(`Exports smoke test OK (${exportEntries.length} subpaths ESM + CJS + DTS)`);

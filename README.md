@@ -23,7 +23,7 @@ Semua fungsi dapat diimpor dari root (`@ghifari29/id-kit`) atau per modul agar b
 | `@ghifari29/id-kit/mask` | `mask`, `maskNIK`, `maskPhone`, `maskAccount` |
 | `@ghifari29/id-kit/npwp` | `parseNPWP`, `isValidNPWP`, `parseNITKU`, `isValidNITKU` |
 | `@ghifari29/id-kit/bank` | `getBank`, `listBank` |
-| `@ghifari29/id-kit/libur` | `cekLibur`, `daftarLibur`, `tahunTersedia` |
+| `@ghifari29/id-kit/libur` | `cekLibur`, `daftarLibur`, `tahunTersedia`, `hitungHariKerja`, `tambahHariKerja` |
 | `@ghifari29/id-kit/waktu` | `formatTanggal`, `formatWaktu`, `formatTanggalWaktu`, `keZonaWaktu`, `zonaWaktuProvinsi` |
 | `@ghifari29/id-kit/wilayah` | `getProvinsi`, `listProvinsi`, `getKabKota`, `listKabKota`, `cariWilayah` |
 
@@ -36,7 +36,7 @@ import { parseNIK, isValidNIK } from "@ghifari29/id-kit/nik";
 import { mask, maskNIK, maskPhone, maskAccount } from "@ghifari29/id-kit/mask";
 import { parseNPWP, parseNITKU, isValidNPWP, isValidNITKU } from "@ghifari29/id-kit/npwp";
 import { getBank, listBank } from "@ghifari29/id-kit/bank";
-import { cekLibur, daftarLibur, tahunTersedia } from "@ghifari29/id-kit/libur";
+import { cekLibur, daftarLibur, tahunTersedia, hitungHariKerja, tambahHariKerja } from "@ghifari29/id-kit/libur";
 import { formatTanggal, formatWaktu, formatTanggalWaktu, keZonaWaktu, zonaWaktuProvinsi } from "@ghifari29/id-kit/waktu";
 import { getProvinsi, listProvinsi, getKabKota, listKabKota, cariWilayah } from "@ghifari29/id-kit/wilayah";
 
@@ -94,6 +94,12 @@ cekLibur("2026-08-17");
 cekLibur("2099-01-01");
 // { status: "data-tidak-tersedia", tahun: 2099 }
 
+hitungHariKerja("2026-08-14", "2026-08-18");
+// { valid: true, hariKerja: 2, totalHari: 5 }
+
+tambahHariKerja("2026-08-14", 1);
+// { valid: true, tanggal: "2026-08-18" }
+
 formatTanggal("2026-11-18", { denganHari: true });
 // "Rabu, 18 November 2026"
 
@@ -148,7 +154,7 @@ if (info.valid) {
 - [x] `detectOperator` (deteksi operator seluler asal)
 - [x] `parseNPWP`, `isValidNPWP`, `parseNITKU`, `isValidNITKU` (validasi format NPWP & NITKU)
 - [x] `getBank`, `listBank` (daftar kode bank 3 digit)
-- [x] `cekLibur`, `daftarLibur`, `tahunTersedia` (libur nasional dan cuti bersama)
+- [x] `cekLibur`, `daftarLibur`, `tahunTersedia`, `hitungHariKerja`, `tambahHariKerja` (libur nasional, cuti bersama, dan hari kerja)
 - [x] `formatTanggal`, `formatWaktu`, `formatTanggalWaktu`, `keZonaWaktu`, `zonaWaktuProvinsi` (format & zona waktu Indonesia)
 - [x] `getProvinsi`, `listProvinsi`, `getKabKota`, `listKabKota`, `cariWilayah` (data 38 provinsi dan 514 kabupaten/kota)
 
@@ -161,7 +167,7 @@ if (info.valid) {
 - Modul `mask` (`mask`, `maskNIK`, `maskPhone`, `maskAccount`) hanya untuk **TAMPILAN** UI, bukan enkripsi atau anonimisasi. Jangan menyimpan data asli di log hanya karena sudah ada fungsi masking. Hanya `mask()` yang menjamin panjang hasil (dalam Unicode code point) sama dengan panjang input.
 - `parseNPWP`, `isValidNPWP`, `parseNITKU`, dan `isValidNITKU` hanya memvalidasi format dan panjang (tanpa checksum), bukan bukti terdaftar di DJP. Klasifikasi `"nik"` hanya menunjukkan bentuk cocok dengan NIK, bukan bukti NPWP orang pribadi terdaftar (WNA bukan penduduk tidak memakai NIK); pola `"badan-awalan-0"` (`0 + 15 digit`) hanya berlaku untuk entitas terdaftar sebelum 14 Juli 2022.
 - Modul `bank` (`getBank`, `listBank`) diverifikasi pada `2026-11-18` dari sumber sekunder (jaringan switching dan situs bank) karena Bank Indonesia tidak menerbitkan satu tabel terbuka untuk semua kode 3 digit. Daftar bisa usang akibat perubahan nama atau merger—cocokkan dengan sumber resmi bank sebelum dipakai untuk transaksi. Tidak ada validasi panjang nomor rekening, dengan sengaja.
-- Modul `libur` (`cekLibur`, `daftarLibur`, `tahunTersedia`) diverifikasi pada `2026-11-18` dari SKB 3 Menteri (Kemenag, Kemnaker, KemenPAN-RB). SKB dapat direvisi di tengah tahun (contoh: pada 2025, satu hari cuti bersama ditambahkan pada Agustus), sehingga data bisa kedaluwarsa dan library membutuhkan rilis baru tiap tahun untuk menambah data tahun berikutnya. Tahun tanpa data menghasilkan `"data-tidak-tersedia"`, bukan `"bukan-libur"`. Ini bukan nasihat hukum mengenai hak cuti atau upah lembur, dan hari libur lokal atau daerah tidak termasuk.
+- Modul `libur` (`cekLibur`, `daftarLibur`, `tahunTersedia`, `hitungHariKerja`, `tambahHariKerja`) diverifikasi pada `2026-11-18` dari SKB 3 Menteri (Kemenag, Kemnaker, KemenPAN-RB). SKB dapat direvisi di tengah tahun (contoh: pada 2025, satu hari cuti bersama ditambahkan pada Agustus), sehingga data bisa kedaluwarsa dan library membutuhkan rilis baru tiap tahun untuk menambah data tahun berikutnya. Tahun tanpa data menghasilkan `"data-tidak-tersedia"`, bukan `"bukan-libur"` (termasuk bila rentang atau hasil `hitungHariKerja`/`tambahHariKerja` menyentuh tahun tanpa data). Ini bukan nasihat hukum mengenai hak cuti atau upah lembur, dan hari libur lokal atau daerah tidak termasuk.
 - Modul `waktu` menolak string ISO tanpa zona waktu eksplisit agar tidak bergantung pada zona waktu mesin lokal (`YYYY-MM-DD` hanya diterima pada `formatTanggal`). Konversi memakai offset tetap (`WIB` `+07:00`, `WITA` `+08:00`, `WIT` `+09:00`) tanpa DST. `zonaWaktuProvinsi` menggunakan 38 kode provinsi Kemendagri (`11`–`96`) agar konsisten dengan modul `nik`, bukan kode wilayah kerja statistik BPS yang berbeda di wilayah Papua.
 - Modul `wilayah` berisi data 38 provinsi dan 514 kabupaten/kota berdasarkan kode wilayah Kemendagri (terakhir diverifikasi `2026-11-18`; penamaan provinsi `31` dan `34` diseragamkan menjadi `"DKI Jakarta"` dan `"DI Yogyakarta"` agar konsisten dengan modul `nik`). Kecamatan, kelurahan/desa, serta kode wilayah kerja statistik BPS tidak disertakan, dan data dapat berubah bila terjadi pemekaran wilayah baru.
 

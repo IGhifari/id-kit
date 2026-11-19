@@ -17,7 +17,12 @@ const AVAILABLE_YEARS: readonly number[] = [...LIBUR_INDEX.keys()].sort(
   (a, b) => a - b
 );
 
-function parseStrictISODate(tanggal: string): number {
+export function parseISODateParts(tanggal: string): {
+  year: number;
+  month: number;
+  day: number;
+  utcMs: number;
+} {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(tanggal)) {
     throw new RangeError("Format tanggal harus YYYY-MM-DD yang valid");
   }
@@ -30,7 +35,8 @@ function parseStrictISODate(tanggal: string): number {
     throw new RangeError("Format tanggal harus YYYY-MM-DD yang valid");
   }
 
-  const date = new Date(Date.UTC(year, month - 1, day));
+  const utcMs = Date.UTC(year, month - 1, day);
+  const date = new Date(utcMs);
   if (
     date.getUTCFullYear() !== year ||
     date.getUTCMonth() !== month - 1 ||
@@ -39,7 +45,7 @@ function parseStrictISODate(tanggal: string): number {
     throw new RangeError("Format tanggal harus YYYY-MM-DD yang valid");
   }
 
-  return year;
+  return { year, month, day, utcMs };
 }
 
 /**
@@ -60,7 +66,7 @@ export function cekLibur(tanggal: string): CekLiburResult {
     throw new TypeError("Tanggal harus berupa string");
   }
 
-  const tahun = parseStrictISODate(tanggal);
+  const { year: tahun } = parseISODateParts(tanggal);
   const yearMap = LIBUR_INDEX.get(tahun);
 
   if (!yearMap) {
