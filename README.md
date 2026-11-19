@@ -17,7 +17,7 @@ Semua fungsi dapat diimpor dari root (`@ghifari29/id-kit`) atau per modul agar b
 
 | Subpath | Ekspor Utama |
 | --- | --- |
-| `@ghifari29/id-kit/format` | `terbilang`, `rupiah` |
+| `@ghifari29/id-kit/format` | `terbilang`, `rupiah`, `parseRupiah`, `rupiahSingkat` |
 | `@ghifari29/id-kit/phone` | `normalizePhone`, `isValidPhone`, `detectOperator` |
 | `@ghifari29/id-kit/nik` | `parseNIK`, `isValidNIK` |
 | `@ghifari29/id-kit/mask` | `mask`, `maskNIK`, `maskPhone`, `maskAccount` |
@@ -30,7 +30,7 @@ Semua fungsi dapat diimpor dari root (`@ghifari29/id-kit`) atau per modul agar b
 ## Pemakaian
 
 ```ts
-import { terbilang, rupiah } from "@ghifari29/id-kit/format";
+import { terbilang, rupiah, parseRupiah, rupiahSingkat } from "@ghifari29/id-kit/format";
 import { normalizePhone, isValidPhone, detectOperator } from "@ghifari29/id-kit/phone";
 import { parseNIK, isValidNIK } from "@ghifari29/id-kit/nik";
 import { mask, maskNIK, maskPhone, maskAccount } from "@ghifari29/id-kit/mask";
@@ -45,6 +45,12 @@ terbilang(1250000);
 
 rupiah(1250000);
 // "Rp1.250.000"
+
+parseRupiah("Rp 1.250.000,50");
+// 1250000.5
+
+rupiahSingkat(1500000);
+// "Rp1,5 jt"
 
 normalizePhone("0812-3456-789");
 // "+628123456789"
@@ -135,7 +141,7 @@ if (info.valid) {
 
 ## Fitur
 
-- [x] `terbilang`, `rupiah`
+- [x] `terbilang`, `rupiah`, `parseRupiah`, `rupiahSingkat`
 - [x] `normalizePhone`, `isValidPhone`
 - [x] `parseNIK`, `isValidNIK` (validasi NIK)
 - [x] `mask`, `maskNIK`, `maskPhone`, `maskAccount` (masking data pribadi)
@@ -148,7 +154,7 @@ if (info.valid) {
 
 ## Batasan
 
-- `terbilang` hanya mendukung bilangan bulat aman (`Number.isSafeInteger`, hingga skala kuadriliun); `rupiah` hanya menerima angka berhingga (`Number.isFinite`).
+- `terbilang` hanya mendukung bilangan bulat aman (`Number.isSafeInteger`, hingga skala kuadriliun); `rupiah` dan `rupiahSingkat` hanya menerima angka berhingga (`Number.isFinite`). `parseRupiah` mewajibkan titik ribuan berkelompok 3 digit (menolak `"1.50"` dengan `null`).
 - `normalizePhone` hanya mengecek pola umum nomor seluler dan menolak karakter huruf/simbol tak dikenal, belum memastikan awalan operator.
 - `detectOperator` hanya mengidentifikasi **operator asal berdasarkan alokasi awalan**, bukan operator aktif saat ini karena adanya *number portability*, dan `grup` dapat berubah karena merger/akuisisi. Data mengacu pada penomoran Komdigi dan informasi resmi operator (terakhir diverifikasi `2026-11-18`; belum ada satu tabel resmi tunggal yang lengkap). Awalan yang belum terverifikasi (`0834`–`0837`, `0879`, `0893`, `0894`) maupun yang telah dicabut (`0828`, `0868`) sengaja mengembalikan `"awalan-tidak-dikenal"`, sehingga nomor yang valid menurut `isValidPhone` tetap dapat mengembalikan `"awalan-tidak-dikenal"`.
 - `parseNIK` dan `isValidNIK` hanya memvalidasi format struktur NIK (bukan bukti keaslian atau keterdaftaran di Dukcapil). Kode kabupaten/kota dan kecamatan tidak divalidasi, dan penentuan abad tahun 2 digit (`YY`) bersifat heuristik terhadap tahun berjalan (UTC).

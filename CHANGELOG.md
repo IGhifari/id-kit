@@ -2,6 +2,12 @@
 
 Seluruh perubahan penting pada `@ghifari29/id-kit` dicatat di dokumen ini.
 
+## [1.1.0] - 2026-11-19
+
+### Ditambahkan
+- `parseRupiah` pada modul `format`: mengurai string Rupiah Indonesia (`"Rp1.250.000"`, `"Rp 1.250.000,50"`, `"Rp. 1.250.000,-"`, `"-Rp5.000"`) ke `number` dengan aturan ribuan ketat 3 digit.
+- `rupiahSingkat` pada modul `format`: memformat angka berhingga ke bentuk ringkas (`rb`, `jt`, `M`, `T`) dengan pembulatan naik otomatis antar skala dan opsi `desimal` (default `1`).
+
 ## [1.0.0] - 2026-11-19
 
 ### Breaking Changes

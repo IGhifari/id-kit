@@ -14,6 +14,8 @@ const expectedFunctions = {
   ".": [
     "terbilang",
     "rupiah",
+    "parseRupiah",
+    "rupiahSingkat",
     "normalizePhone",
     "isValidPhone",
     "detectOperator",
@@ -43,7 +45,7 @@ const expectedFunctions = {
     "listKabKota",
     "cariWilayah",
   ],
-  "./format": ["terbilang", "rupiah"],
+  "./format": ["terbilang", "rupiah", "parseRupiah", "rupiahSingkat"],
   "./phone": ["normalizePhone", "isValidPhone", "detectOperator"],
   "./nik": ["parseNIK", "isValidNIK"],
   "./mask": ["mask", "maskNIK", "maskPhone", "maskAccount"],
@@ -113,6 +115,8 @@ const formatEsm = await import(
 );
 assert.equal(formatEsm.rupiah(-5000), "-Rp5.000");
 assert.equal(formatEsm.terbilang(1e15), "satu kuadriliun rupiah");
+assert.equal(formatEsm.parseRupiah("Rp1.250.000,50"), 1250000.5);
+assert.equal(formatEsm.rupiahSingkat(1_500_000), "Rp1,5 jt");
 
 const wilayahCjs = require(
   path.resolve(rootDir, pkg.exports["./wilayah"].require)
