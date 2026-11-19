@@ -104,6 +104,35 @@ cariWilayah("sorong");
 // [{ tingkat: "kabupaten", kode: "96.01", ... }, { tingkat: "kabupaten", kode: "96.02", ... }, { tingkat: "kota", kode: "96.71", ... }]
 ```
 
+## Contoh Kombinasi
+
+Contoh menggabungkan beberapa modul untuk menampilkan ringkasan data pendaftaran dan transaksi (menggunakan data fiktif):
+
+```ts
+import { rupiah } from "@ghifari29/id-kit/format";
+import { parseNIK } from "@ghifari29/id-kit/nik";
+import { maskNIK } from "@ghifari29/id-kit/mask";
+import { getKabKota } from "@ghifari29/id-kit/wilayah";
+import { formatTanggalWaktu, zonaWaktuProvinsi } from "@ghifari29/id-kit/waktu";
+import { cekLibur } from "@ghifari29/id-kit/libur";
+
+const nik = "3171011505900001";
+const info = parseNIK(nik);
+
+if (info.valid) {
+  const daerah = getKabKota(`${info.provinsiKode}.${info.kabKotaKode}`);
+  const zona = zonaWaktuProvinsi(info.provinsiKode) ?? "WIB";
+
+  console.log({
+    nikTersensor: maskNIK(nik), // "3171********0001"
+    daerah: daerah?.nama,       // "Kota Administrasi Jakarta Pusat"
+    waktu: formatTanggalWaktu("2026-08-17T03:00:00Z", { zona }), // "17 Agustus 2026, 10:00 WIB"
+    statusHari: cekLibur("2026-08-17"), // { status: "libur-nasional", nama: "Proklamasi Kemerdekaan" }
+    nominal: rupiah(1250000),   // "Rp1.250.000"
+  });
+}
+```
+
 ## Fitur
 
 - [x] `terbilang`, `rupiah`
@@ -132,7 +161,7 @@ cariWilayah("sorong");
 
 ## Berkontribusi
 
-Issue dan pull request sangat diterima. Jalankan `npm test` sebelum mengirim PR.
+Issue dan pull request sangat diterima. Baca [CONTRIBUTING.md](./CONTRIBUTING.md) sebelum mengirim PR, lihat riwayat rilis di [CHANGELOG.md](./CHANGELOG.md), dan laporkan celah keamanan secara privat mengikuti [SECURITY.md](./SECURITY.md).
 
 ## Lisensi
 

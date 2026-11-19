@@ -1,0 +1,52 @@
+name: Laporan Bug
+description: Laporkan perilaku tidak sesuai atau error pada fungsi di @ghifari29/id-kit
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        **Peringatan Privasi:** Jangan pernah menuliskan NIK, NPWP, nomor telepon, atau nomor rekening sungguhan di sini. Gunakan data fiktif.
+  - type: input
+    id: version
+    attributes:
+      label: Versi @ghifari29/id-kit
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: module
+    attributes:
+      label: Modul Terkait
+      options:
+        - format
+        - phone
+        - nik
+        - mask
+        - npwp
+        - bank
+        - libur
+        - waktu
+        - wilayah
+        - lain-lain
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Langkah Reproduksi / Contoh Kode (Data Fiktif)
+      placeholder: |
+        import { ... } from "@ghifari29/id-kit/...";
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Hasil yang Diharapkan vs Hasil Aktual
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Lingkungan (Node.js, OS, Timezone jika relevan)
+      placeholder: "Node 22, Windows, Asia/Jakarta"

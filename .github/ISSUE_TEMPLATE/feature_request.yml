@@ -1,0 +1,26 @@
+name: Usulan Fitur
+description: Usulkan fungsi atau modul utilitas Indonesia baru
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Masalah atau Kebutuhan
+      description: Jelaskan kasus penggunaan nyata yang ingin diselesaikan.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Usulan API & Contoh Pemakaian
+      placeholder: |
+        import { ... } from "@ghifari29/id-kit/...";
+    validations:
+      required: true
+  - type: checkboxes
+    id: fit
+    attributes:
+      label: Kesesuaian dengan Prinsip Proyek
+      options:
+        - label: Bisa berjalan offline tanpa dependency runtime dan tanpa memanggil API eksternal
+          required: true

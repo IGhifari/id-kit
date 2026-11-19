@@ -2,7 +2,7 @@
 
 Seluruh perubahan penting pada `@ghifari29/id-kit` dicatat di dokumen ini.
 
-## [Unreleased] - Target 1.0.0
+## [1.0.0] - 2026-11-19
 
 ### Breaking Changes
 - `rupiah`: angka negatif kini diformat menjadi `"-Rp5.000"` (sebelumnya `"Rp-5.000"`), `-0` menjadi `"Rp0"`, input non-number melempar `TypeError`, dan `NaN`/`Infinity` melempar `RangeError`.

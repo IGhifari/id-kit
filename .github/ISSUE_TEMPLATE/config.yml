@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Laporkan Celah Keamanan (Privat)
+    url: https://github.com/IGhifari/id-kit/security/advisories/new
+    about: Laporkan masalah keamanan secara privat tanpa membuka public issue.

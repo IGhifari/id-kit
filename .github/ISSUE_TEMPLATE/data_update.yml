@@ -1,0 +1,33 @@
+name: Pembaruan Data
+description: Laporkan revisi SKB hari libur, rebrand/merger bank, awalan operator, atau pembaruan wilayah
+labels: ["data"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Gunakan template ini untuk melaporkan data yang sudah berubah atau perlu ditambahkan (SKB 3 Menteri, kode bank, awalan operator, atau kode wilayah Kemendagri). Jangan sertakan data pribadi sungguhan.
+  - type: dropdown
+    id: dataset
+    attributes:
+      label: Jenis Data
+      options:
+        - Hari Libur Nasional & Cuti Bersama (SKB 3 Menteri)
+        - Daftar Kode Bank (3 digit)
+        - Awalan Operator Seluler (08xx)
+        - Data Wilayah (Provinsi / Kabupaten / Kota)
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Detail Perubahan
+      placeholder: Jelaskan tanggal, kode, atau nama yang berubah/perlu ditambahkan.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sumber Resmi
+      placeholder: Cantumkan tautan resmi pemerintah (.go.id), situs resmi bank, atau situs resmi operator.
+    validations:
+      required: true
