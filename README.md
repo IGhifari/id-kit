@@ -5,6 +5,8 @@
 
 Utilitas TypeScript offline dan tanpa dependency untuk kebutuhan Indonesia: format Rupiah & terbilang, nomor telepon & deteksi operator, NIK, masking data pribadi, NPWP/NITKU, kode bank, hari libur nasional, format & zona waktu (`WIB`/`WITA`/`WIT`), serta data wilayah (38 provinsi dan 514 kabupaten/kota).
 
+Coba langsung di browser: [Playground Interaktif](https://ighifari.github.io/id-kit/) (atau jalankan `npm run docs:preview` secara lokal).
+
 ## Instalasi
 
 ```bash

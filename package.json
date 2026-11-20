@@ -67,6 +67,7 @@
     "test": "vitest run",
     "test:exports": "node scripts/check-exports.mjs",
     "typecheck": "tsc --noEmit",
+    "docs:preview": "npm run build && node scripts/serve-docs.mjs",
     "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run test:exports"
   },
   "keywords": [

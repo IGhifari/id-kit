@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ghifari29/id-kit — Playground Interaktif</title>
+    <meta
+      name="description"
+      content="Playground interaktif offline untuk mencoba 9 modul utilitas Indonesia @ghifari29/id-kit langsung di browser."
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <span class="brand-badge">id-kit</span>
+          <div>
+            <h1>@ghifari29/id-kit</h1>
+            <p class="subtitle">Utilitas TypeScript offline &amp; zero-dependency untuk Indonesia</p>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <a
+            class="btn btn-ghost"
+            href="https://www.npmjs.com/package/@ghifari29/id-kit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            npm
+          </a>
+          <a
+            class="btn btn-ghost"
+            href="https://github.com/IGhifari/id-kit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          <button type="button" id="theme-toggle" class="btn btn-outline" aria-label="Ganti tema">
+            Mode Gelap
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container main-layout">
+      <section class="intro-bar">
+        <div class="install-box">
+          <code>npm i @ghifari29/id-kit</code>
+          <button type="button" id="copy-install" class="btn btn-sm">Salin</button>
+        </div>
+        <p class="privacy-note">
+          Semua proses berjalan 100% di browser tanpa mengirim data ke server mana pun. Gunakan selalu
+          <strong>data fiktif</strong> saat menguji NIK, NPWP, nomor telepon, atau rekening.
+        </p>
+      </section>
+
+      <nav class="module-tabs" id="module-tabs" aria-label="Pilih modul"></nav>
+
+      <section class="workspace">
+        <div class="panel input-panel">
+          <div class="panel-header">
+            <div>
+              <h2 id="mod-title"></h2>
+              <p id="mod-desc" class="muted"></p>
+            </div>
+            <span id="mod-subpath" class="subpath-pill"></span>
+          </div>
+
+          <div id="mod-presets" class="presets"></div>
+          <form id="mod-controls" class="controls"></form>
+          <p id="mod-warning" class="warning-box"></p>
+        </div>
+
+        <div class="panel output-panel">
+          <div class="panel-header">
+            <h3>Hasil</h3>
+            <span class="badge-live">Live</span>
+          </div>
+          <div id="mod-output" class="output-cards"></div>
+
+          <div class="code-section">
+            <div class="code-header">
+              <span>Cuplikan Kode TypeScript</span>
+              <button type="button" id="copy-code" class="btn btn-sm">Salin Kode</button>
+            </div>
+            <pre><code id="mod-code"></code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      <span>Lisensi MIT · Berjalan offline dari build ESM @ghifari29/id-kit</span>
+      <a href="https://github.com/IGhifari/id-kit/blob/main/README.md" target="_blank" rel="noopener noreferrer">
+        Dokumentasi Lengkap
+      </a>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
